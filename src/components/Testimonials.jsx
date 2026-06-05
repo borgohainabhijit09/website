@@ -6,21 +6,27 @@ import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 const testimonials = [
   {
     id: 1,
-    quote: "The India Watch provided us with unparalleled insights that were critical to our market entry strategy. Their deep understanding of the regulatory landscape and consumer behavior gave us the confidence to invest heavily.",
-    name: "Sarah Jenkins",
-    title: "Director of APAC Operations, GlobalTech",
+    quote: "We have extensively engaged with The India Watch for a wide range of product launch studies. They have helped us with pan-India market studies including both surveys as well as F2F interviews. We have also commissioned numerous market analysis services covering market intelligence data, industry data, competitive insights, distribution structure analysis, regulatory inputs, etc.",
+    name: "Ajay Singh",
+    title: "Head Marketing & Partnerships, HRX India",
   },
   {
     id: 2,
-    quote: "Their data-driven approach and meticulous research methodology helped us identify niche market opportunities we had previously overlooked. An invaluable partner for any firm serious about the Indian market.",
-    name: "Michael Chen",
-    title: "VP of Strategy, Nexus Capital",
+    quote: "One of my references connected us with Mr. Paritosh from The India Watch, as we were looking for a market study on India’s maritime trade, shipping, and container industry. After our initial discussion, we hired them. In less than 3 weeks, they came up with a very detailed report which gave us ample insights into the markets. They were also very cooperative in refurbishing additional data & insights requested by us.",
+    name: "Eugenia",
+    title: "Head of International Projects, SG Trans Russia",
   },
   {
     id: 3,
-    quote: "Working with The India Watch was a game-changer. They don't just provide data; they deliver actionable strategic intelligence that directly translates to competitive advantage.",
-    name: "Priya Sharma",
-    title: "Founder & CEO, Elevate Retail",
+    quote: "We have hired the services of The India Watch to prepare a feasibility report for one of our new fine dining restaurants in Meghalaya. The team was really helpful and they delivered an incisive and detailed feasibility study report within the timeline decided.",
+    name: "Pallavi Deka",
+    title: "MD, Khorika Group",
+  },
+  {
+    id: 4,
+    quote: "We hired The India Watch to help us with a detailed market study and feasibility analysis for one of our hospitality investments in Gurgaon. They are thoroughly professional and have a very good understanding of the F&B, PBCL, and Hospitality industry. Quite impressed by their overall approach, depth of study, and professional behavior.",
+    name: "Saurav Bhaik",
+    title: "CEO, Tagbin",
   }
 ];
 
@@ -68,12 +74,12 @@ export default function Testimonials() {
                 transition={{ duration: 0.5, ease: "easeOut" }}
                 className="text-center px-4 md:px-12"
               >
-                <p className="text-xl md:text-3xl font-serif text-gray-700 leading-relaxed mb-8 italic">
+                <p className="text-sm md:text-lg font-serif text-gray-700 leading-relaxed mb-6 italic">
                   "{testimonials[currentIndex].quote}"
                 </p>
                 <div>
-                  <h4 className="text-lg font-bold text-gray-900">{testimonials[currentIndex].name}</h4>
-                  <p className="text-blue-600 text-sm font-medium mt-1">{testimonials[currentIndex].title}</p>
+                  <h4 className="text-sm font-bold text-gray-900">{testimonials[currentIndex].name}</h4>
+                  <p className="text-blue-600 text-xs font-medium mt-1">{testimonials[currentIndex].title}</p>
                 </div>
               </motion.div>
             </AnimatePresence>
