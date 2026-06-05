@@ -18,7 +18,7 @@ export default function CTA() {
           <div>
             <p className="text-blue-400 text-sm font-bold uppercase tracking-widest mb-4">Start Your Engagement</p>
             <h2 className="text-4xl md:text-5xl font-serif font-bold text-white mb-6 leading-tight">
-              Ready to Navigate the Indian Market?
+              Initiate a Strategic Dialogue.
             </h2>
             <p className="text-xl text-gray-300 leading-relaxed mb-10">
               Connect with our senior advisory partners to explore how our intelligence can power your strategic decisions.

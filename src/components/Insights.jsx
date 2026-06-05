@@ -8,10 +8,10 @@ export default function Insights() {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div className="max-w-2xl">
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-primary mb-4">
-              Latest Perspectives & Market Analysis
+              The India Watch Institute: Research & Perspectives
             </h2>
             <p className="text-lg text-secondary">
-              Rigorous research and strategic foresight from our analysts.
+              Rigorous proprietary research and strategic foresight from our core analysts.
             </p>
           </div>
           <Link href="#" className="inline-flex items-center text-primary font-semibold hover:text-blue-600 transition-colors shrink-0">
@@ -42,6 +42,18 @@ export default function Insights() {
               <p className="text-gray-600 text-lg line-clamp-3 leading-relaxed">
                 An extensive analysis of how shifting government policies are creating unprecedented opportunities for foreign direct investment in large-scale infrastructure projects across Tier-1 and Tier-2 cities.
               </p>
+              <div className="mt-8 pt-6 border-t border-gray-100 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-bold text-xs">P</div>
+                  <div className="text-sm">
+                    <div className="font-bold text-gray-900">Paritosh</div>
+                    <div className="text-gray-500 text-xs">Principal Analyst</div>
+                  </div>
+                </div>
+                <button className="text-blue-600 hover:text-blue-800 font-bold text-sm tracking-wide uppercase transition-colors">
+                  Download Executive Summary (PDF)
+                </button>
+              </div>
             </div>
           </Link>
 
@@ -57,6 +69,7 @@ export default function Insights() {
                   <span className="text-blue-600">Industry Brief</span>
                   <span>•</span>
                   <span>Oct 18, 2024</span>
+                  <span className="text-gray-400">7 Min Read</span>
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors leading-snug">
                   Supply Chain Resilience in Indian Electronics Manufacturing
@@ -68,6 +81,7 @@ export default function Insights() {
                   <span className="text-blue-600">Consumer Insights</span>
                   <span>•</span>
                   <span>Oct 12, 2024</span>
+                  <span className="text-gray-400">5 Min Read</span>
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors leading-snug">
                   Decoding the Tier-2 Consumer Mindset: The D2C Expansion
@@ -79,6 +93,7 @@ export default function Insights() {
                   <span className="text-blue-600">Policy Analysis</span>
                   <span>•</span>
                   <span>Sep 28, 2024</span>
+                  <span className="text-gray-400">9 Min Read</span>
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors leading-snug">
                   Implications of the New National Logistics Policy on Last-Mile Delivery

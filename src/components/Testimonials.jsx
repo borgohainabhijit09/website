@@ -49,7 +49,7 @@ export default function Testimonials() {
   }, []);
 
   return (
-    <section className="py-24 bg-gradient-to-b from-[#f8fafc] to-white relative overflow-hidden">
+    <section className="py-24 bg-gradient-to-b from-[#f8fafc] to-white relative overflow-hidden border-t border-gray-100">
       <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 rounded-full bg-blue-50 blur-3xl opacity-50"></div>
       <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-blue-100 blur-3xl opacity-50"></div>
       

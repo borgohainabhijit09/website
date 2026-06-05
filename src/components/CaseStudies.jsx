@@ -11,9 +11,9 @@ const cases = [
     client: "Global Logistics Firm",
     icon: Anchor,
     image: "https://images.unsplash.com/photo-1494412651409-8963ce7935a7?q=80&w=2070&auto=format&fit=crop",
-    challenge: "The client required a comprehensive feasibility analysis of India's maritime trade and container industry to guide a multi-million dollar market entry strategy.",
+    challenge: "Scope: 5 major ports. The client required a comprehensive feasibility analysis of India's maritime trade and container industry to guide a multi-million dollar market entry strategy.",
     approach: "We executed an intensive 3-week market study, incorporating competitor benchmarking, regulatory framework analysis, and qualitative insights from key industry stakeholders.",
-    impact: "Delivered actionable intelligence that shaped the client's final investment roadmap, minimizing entry risk and identifying untapped high-margin corridors."
+    impact: "Delivered actionable intelligence that shaped the final investment roadmap, minimizing entry risk and identifying untapped corridors with a projected 18% higher margin."
   },
   {
     id: 2,
@@ -21,9 +21,9 @@ const cases = [
     client: "Premium Hospitality Group",
     icon: Utensils,
     image: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=1934&auto=format&fit=crop",
-    challenge: "The client needed a detailed market study and financial feasibility analysis prior to initiating large-scale hospitality investments in the competitive Gurgaon market.",
+    challenge: "Timeline: 4 Weeks. The client needed a detailed market study and financial feasibility analysis prior to initiating large-scale hospitality investments in the competitive Gurgaon market.",
     approach: "Conducted deep-dive consumer demographic research, location viability analysis, and competitive positioning strategies tailored to the PBCL sector.",
-    impact: "Provided an incisive, data-backed feasibility report that enabled the leadership team to secure funding and execute a successful launch within 6 months."
+    impact: "Provided an incisive, data-backed feasibility report that enabled the leadership team to secure ₹50Cr+ funding and accelerate the launch timeline by 3 months."
   },
   {
     id: 3,
@@ -31,9 +31,9 @@ const cases = [
     client: "National Sports Brand",
     icon: ShoppingBag,
     image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1950&auto=format&fit=crop",
-    challenge: "Required granular, pan-India market studies to support a major product launch, including understanding shifting consumer preferences and distribution bottlenecks.",
-    approach: "Deployed a hybrid research model utilizing large-scale quantitative surveys combined with targeted F2F interviews across Tier 1 and Tier 2 cities.",
-    impact: "Equipped the marketing team with precise demographic targeting data and competitive insights, directly contributing to a 24% higher adoption rate post-launch."
+    challenge: "Scale: Pan-India (Tier 1 & 2). Required granular market studies to support a major product launch, including understanding shifting consumer preferences and distribution bottlenecks.",
+    approach: "Deployed a hybrid research model utilizing large-scale quantitative surveys (n=5,000+) combined with targeted F2F interviews.",
+    impact: "Equipped the marketing team with precise demographic targeting data, directly contributing to a 24% higher adoption rate and a 15% reduction in CAC post-launch."
   }
 ];
 
@@ -151,7 +151,7 @@ export default function CaseStudies() {
                       {activeCase.impact}
                     </p>
                     <Link href="#" className="inline-flex items-center text-blue-600 font-bold hover:text-blue-800 transition-colors text-sm uppercase tracking-wider">
-                      Read Full Case Study <ArrowRight className="w-4 h-4 ml-2" />
+                      Download Strategy Brief (PDF) <ArrowRight className="w-4 h-4 ml-2" />
                     </Link>
                   </div>
                 </div>

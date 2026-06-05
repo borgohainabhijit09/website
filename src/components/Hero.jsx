@@ -47,7 +47,7 @@ export default function Hero() {
             custom={0.15}
             className="text-3xl md:text-5xl lg:text-6xl font-serif font-bold text-white leading-[1.5] mb-8"
           >
-            Decoding the Indian Market.<br /> Delivering Strategic Clarity.
+            Strategic Clarity for India's Complex Markets.
           </motion.h1>
 
           {/* Body */}
@@ -58,7 +58,7 @@ export default function Hero() {
             custom={0.28}
             className="text-xl md:text-2xl text-gray-300 mb-12 leading-relaxed max-w-2xl font-light"
           >
-            We equip global investors, CXOs, and enterprises with actionable intelligence and data-backed advisory to navigate and win in India.
+            Delivering the granular data, competitive insights, and regulatory foresight required to win in the world's fastest-growing economy.
           </motion.p>
 
           {/* CTAs */}
