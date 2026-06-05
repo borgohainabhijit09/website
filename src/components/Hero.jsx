@@ -58,7 +58,7 @@ export default function Hero() {
             custom={0.28}
             className="text-xl md:text-2xl text-gray-300 mb-12 leading-relaxed max-w-2xl font-light"
           >
-            The India Watch is a premier research and advisory firm equipping global investors and enterprises with the intelligence to win in India.
+            We equip global investors, CXOs, and enterprises with actionable intelligence and data-backed advisory to navigate and win in India.
           </motion.p>
 
           {/* CTAs */}

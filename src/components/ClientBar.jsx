@@ -35,17 +35,25 @@ export default function ClientBar() {
         </div>
       </div>
 
-      {/* Stats Bar */}
-      <div className="py-10 px-6">
-        <div className="container mx-auto max-w-5xl grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          {stats.map((stat, i) => (
-            <div key={i}>
-              <div className="text-3xl md:text-4xl font-serif font-bold text-primary mb-1">
-                {stat.value}
-              </div>
-              <div className="text-sm text-secondary font-medium">{stat.label}</div>
+      {/* Impact Metrics & Media */}
+      <div className="py-16 px-6 bg-gray-50/50">
+        <div className="container mx-auto max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-12 text-center divide-y md:divide-y-0 md:divide-x divide-gray-200">
+          <div className="pt-6 md:pt-0">
+            <div className="text-4xl font-serif font-bold text-gray-900 mb-2">500+</div>
+            <div className="text-sm text-gray-600 font-medium uppercase tracking-wider">Market Reports Published</div>
+          </div>
+          <div className="pt-6 md:pt-0">
+            <div className="text-4xl font-serif font-bold text-gray-900 mb-2">50+</div>
+            <div className="text-sm text-gray-600 font-medium uppercase tracking-wider">Global Enterprise Partners</div>
+          </div>
+          <div className="pt-6 md:pt-0 flex flex-col items-center justify-center">
+            <div className="text-sm text-gray-600 font-medium uppercase tracking-wider mb-4">Featured In</div>
+            <div className="flex flex-wrap justify-center gap-6 opacity-60 grayscale">
+              <span className="font-serif font-bold text-lg">Bloomberg</span>
+              <span className="font-serif font-bold text-lg">Forbes</span>
+              <span className="font-serif font-bold text-lg">Economic Times</span>
             </div>
-          ))}
+          </div>
         </div>
       </div>
     </section>
