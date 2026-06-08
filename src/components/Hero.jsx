@@ -238,6 +238,7 @@ export default function Hero() {
           <div className="hidden md:flex items-center gap-4">
             <button 
               onClick={() => paginate(-1)}
+              aria-label="Previous slide"
               className="group relative flex items-center justify-center w-14 h-14 rounded-full border border-white/20 bg-white/5 backdrop-blur-md text-white hover:bg-white/20 hover:border-white/40 transition-all overflow-hidden"
             >
               <div className="absolute inset-0 bg-white/10 translate-y-[100%] group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
@@ -245,6 +246,7 @@ export default function Hero() {
             </button>
             <button 
               onClick={() => paginate(1)}
+              aria-label="Next slide"
               className="group relative flex items-center justify-center w-14 h-14 rounded-full border border-white/20 bg-white/5 backdrop-blur-md text-white hover:bg-white/20 hover:border-white/40 transition-all overflow-hidden"
             >
               <div className="absolute inset-0 bg-white/10 translate-y-[100%] group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
