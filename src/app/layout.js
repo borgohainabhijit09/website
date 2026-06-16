@@ -1,4 +1,4 @@
-import { Inter, Playfair_Display } from "next/font/google";
+import { Inter, Montserrat } from "next/font/google";
 import "./globals.css";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
 
@@ -8,8 +8,8 @@ const inter = Inter({
   display: "swap",
 });
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
   subsets: ["latin"],
   display: "swap",
 });
@@ -70,7 +70,7 @@ export const metadata = {
 };
 
 export const viewport = {
-  themeColor: "#0F2744",
+  themeColor: "#0A2342",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -78,8 +78,8 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
-      <body className="font-sans antialiased text-foreground bg-background">
+    <html lang="en" className={`${inter.variable} ${montserrat.variable}`}>
+      <body className="antialiased text-foreground bg-background">
         {children}
         <WhatsAppIcon />
       </body>

@@ -1,340 +1,341 @@
 "use client";
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { Menu, X, ChevronDown, Mail, Phone, Calendar, ArrowRight, BarChart3, LineChart, MessageSquare, Compass, MapPin, FileText, Settings, Building2, ShoppingBag, Laptop, Briefcase, Landmark } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useRef } from 'react';
+import { Menu, Search, ArrowRight } from 'lucide-react';
+
+const menuData = {
+  'Solutions': {
+    description: "Transform your business with our comprehensive suite of consulting services tailored for the modern enterprise.",
+    columns: [
+      {
+        title: "Strategy",
+        items: ["Business Transformation", "Digital Strategy", "Market Entry", "M&A Advisory"]
+      },
+      {
+        title: "Operations",
+        items: ["Supply Chain Optimization", "Process Engineering", "Cost Reduction", "Organizational Design"]
+      },
+      {
+        title: "Technology",
+        items: ["Cloud Migration", "Data & Analytics", "Cybersecurity", "Enterprise Architecture"]
+      }
+    ],
+    featured: {
+      title: "Featured Service",
+      desc: "Accelerate your AI transformation journey with our new GenAI framework.",
+      action: "Learn More"
+    }
+  },
+  'Industries': {
+    description: "Deep expertise across key sectors driving the global economy forward.",
+    columns: [
+      {
+        title: "Financial Services",
+        items: ["Banking & Markets", "Insurance", "Wealth Management", "FinTech"]
+      },
+      {
+        title: "Healthcare",
+        items: ["Providers", "Life Sciences", "Digital Health", "Medical Devices"]
+      },
+      {
+        title: "Consumer & Retail",
+        items: ["E-commerce", "FMCG", "Retail Operations", "Consumer Goods"]
+      }
+    ],
+    featured: {
+      title: "Industry Insights",
+      desc: "Read our latest 2024 report on the future of healthcare technology and patient care.",
+      action: "Read Report"
+    }
+  },
+  'About Us': {
+    description: "Discover who we are, our core values, and the impact we create globally.",
+    columns: [
+      {
+        title: "Our Firm",
+        items: ["Leadership Team", "Global Locations", "Our History", "Corporate Governance"]
+      },
+      {
+        title: "Our Impact",
+        items: ["Sustainability (ESG)", "Diversity & Inclusion", "Community Engagement", "Client Success Stories"]
+      }
+    ],
+    featured: {
+      title: "Join Our Mission",
+      desc: "We are committed to delivering exceptional value to our clients and society.",
+      action: "Our Vision"
+    }
+  },
+  'Careers': {
+    description: "Build a rewarding career solving the world's most complex challenges.",
+    columns: [
+      {
+        title: "Opportunities",
+        items: ["Experienced Professionals", "Students & Graduates", "Internships", "Alumni Network"]
+      },
+      {
+        title: "Life at the Firm",
+        items: ["Culture & Values", "Learning & Development", "Benefits & Wellbeing", "Career Paths"]
+      }
+    ],
+    featured: {
+      title: "Hot Roles",
+      desc: "We are actively hiring for Data Scientists and Strategy Consultants globally.",
+      action: "View Openings"
+    }
+  }
+};
 
 export default function Header() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState(null);
-  const [modalOpen, setModalOpen] = useState(false);
-  
-  // Mobile accordion state
-  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
-  const [mobileIndustriesOpen, setMobileIndustriesOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const timeoutRef = useRef(null);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
-    if (modalOpen || mobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-  }, [modalOpen, mobileMenuOpen]);
+  const handleMouseEnter = (menu) => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setActiveMenu(menu);
+  };
 
-  const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
-  const toggleModal = () => setModalOpen(!modalOpen);
-
-  const services = [
-    { name: "Business Research & Advisory", icon: <BarChart3 className="w-5 h-5 text-blue-600"/>, desc: "Deep dive analysis and strategic recommendations." },
-    { name: "Market Research Services", icon: <LineChart className="w-5 h-5 text-blue-600"/>, desc: "Data-driven intelligence on market size and trends." },
-    { name: "Strategic Communication", icon: <MessageSquare className="w-5 h-5 text-blue-600"/>, desc: "Positioning and messaging frameworks." },
-    { name: "Feasibility Studies", icon: <Compass className="w-5 h-5 text-blue-600"/>, desc: "Assessment of project viability and risk." },
-    { name: "India Market Entry", icon: <MapPin className="w-5 h-5 text-blue-600"/>, desc: "End-to-end strategy for foreign enterprises." },
-    { name: "Business Plan & Pitch Deck", icon: <FileText className="w-5 h-5 text-blue-600"/>, desc: "Investor-grade documentation for fundraising." }
-  ];
-
-  const industries = [
-    { name: "Manufacturing", icon: <Settings className="w-5 h-5 text-blue-600"/> },
-    { name: "Infrastructure", icon: <Building2 className="w-5 h-5 text-blue-600"/> },
-    { name: "Retail & Consumer", icon: <ShoppingBag className="w-5 h-5 text-blue-600"/> },
-    { name: "ICT & Technology", icon: <Laptop className="w-5 h-5 text-blue-600"/> },
-    { name: "Services Sector", icon: <Briefcase className="w-5 h-5 text-blue-600"/> },
-    { name: "Public Policy", icon: <Landmark className="w-5 h-5 text-blue-600"/> }
-  ];
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      setActiveMenu(null);
+    }, 150); // slight delay to prevent flickering
+  };
 
   return (
-    <>
-      <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md' : 'bg-white/95 backdrop-blur-sm'}`}>
-        {/* Top Header */}
-        <div className={`bg-primary text-gray-300 text-xs py-2 transition-all duration-300 ${isScrolled ? 'hidden' : 'block'}`}>
-          <div className="container mx-auto px-6 max-w-7xl flex justify-between items-center">
-            <div className="flex space-x-6">
-              <a href="mailto:info@theindiawatch.com" className="flex items-center hover:text-white transition-colors">
-                <Mail className="w-3 h-3 mr-2" /> info@theindiawatch.com
-              </a>
-              <a href="tel:+918076704267" className="flex items-center hover:text-white transition-colors">
-                <Phone className="w-3 h-3 mr-2" /> +91 8076704267
-              </a>
-            </div>
-            <div className="hidden sm:flex space-x-4">
-              <Link href="#" className="hover:text-white transition-colors">Client Portal</Link>
-              <Link href="#" className="hover:text-white transition-colors">Careers</Link>
-            </div>
+    <header 
+      style={{ 
+        backgroundColor: scrolled ? '#04152e' : 'transparent', 
+        borderBottom: scrolled ? '1px solid rgba(255, 255, 255, 0.05)' : '1px solid transparent',
+        position: 'fixed',
+        left: 0,
+        right: 0,
+        top: 0,
+        zIndex: 50,
+        transition: 'background-color 0.3s ease, border-bottom 0.3s ease'
+      }}
+      onMouseLeave={handleMouseLeave}
+    >
+      <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '80px', position: 'relative' }}>
+        {/* Logo Section */}
+        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', zIndex: 51 }}>
+          <div style={{ 
+            fontFamily: 'var(--font-sans)', 
+            fontSize: '2.25rem', 
+            fontWeight: 400, 
+            color: '#ffffff',
+            letterSpacing: '0.01em',
+            lineHeight: 1,
+            display: 'flex',
+            alignItems: 'flex-start'
+          }}>
+            the india watch<sup style={{fontSize: '0.75rem', marginTop: '0.25rem', marginLeft: '0.1rem', color: '#cbd5e1'}}>®</sup>
+          </div>
+          <div style={{
+            color: '#ffffff',
+            fontSize: '0.8rem',
+            fontStyle: 'italic',
+            marginTop: '0.2rem',
+            letterSpacing: '0.02em',
+            opacity: 0.9
+          }}>
+            Global Business Consulting
           </div>
         </div>
 
-        {/* Main Navigation */}
-        <div className={`py-4 ${isScrolled ? 'py-4' : 'py-5'}`}>
-          <div className="container mx-auto px-6 max-w-7xl flex items-center justify-between">
-            {/* Logo */}
-            <Link href="/" className="text-2xl font-serif font-bold text-primary tracking-tight z-50 relative">
-              The India Watch<span className="text-blue-600">.</span>
-            </Link>
-
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-8">
-              {/* Services Mega Menu */}
-              <div 
-                className="relative group"
-                onMouseEnter={() => setActiveMenu('services')}
-                onMouseLeave={() => setActiveMenu(null)}
-              >
-                <button className="flex items-center space-x-1 text-sm font-medium text-secondary hover:text-primary transition-colors py-2">
-                  <span>Services</span>
-                  <ChevronDown className="w-4 h-4" />
-                </button>
-                <AnimatePresence>
-                  {activeMenu === 'services' && (
-                    <motion.div 
-                      initial={{ opacity: 0, y: 15 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 15 }}
-                      transition={{ duration: 0.2 }}
-                      className="absolute top-full left-1/2 -translate-x-1/2 w-[600px] bg-white shadow-2xl border border-gray-100 rounded-xl p-8 grid grid-cols-2 gap-6"
-                    >
-                      {services.map((service, idx) => (
-                        <Link key={idx} href="#" className="group flex items-start space-x-4 p-3 rounded-lg hover:bg-surface transition-colors">
-                          <div className="mt-1 bg-blue-50 p-2 rounded shrink-0 group-hover:bg-blue-100 transition-colors">
-                            {service.icon}
-                          </div>
-                          <div>
-                            <h4 className="text-sm font-bold text-primary mb-1 group-hover:text-blue-600 transition-colors">{service.name}</h4>
-                            <p className="text-xs text-secondary leading-relaxed">{service.desc}</p>
-                          </div>
-                        </Link>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-
-              {/* Industries Mega Menu */}
-              <div 
-                className="relative group"
-                onMouseEnter={() => setActiveMenu('industries')}
-                onMouseLeave={() => setActiveMenu(null)}
-              >
-                <button className="flex items-center space-x-1 text-sm font-medium text-secondary hover:text-primary transition-colors py-2">
-                  <span>Industries</span>
-                  <ChevronDown className="w-4 h-4" />
-                </button>
-                <AnimatePresence>
-                  {activeMenu === 'industries' && (
-                    <motion.div 
-                      initial={{ opacity: 0, y: 15 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 15 }}
-                      transition={{ duration: 0.2 }}
-                      className="absolute top-full left-1/2 -translate-x-1/2 w-[400px] bg-white shadow-2xl border border-gray-100 rounded-xl p-6 grid grid-cols-2 gap-2"
-                    >
-                      {industries.map((industry, idx) => (
-                        <Link key={idx} href="#" className="group flex items-center space-x-3 p-3 rounded-lg hover:bg-surface transition-colors">
-                          <div className="bg-blue-50 p-2 rounded shrink-0 group-hover:bg-blue-100 transition-colors">
-                            {industry.icon}
-                          </div>
-                          <span className="text-sm font-bold text-primary group-hover:text-blue-600 transition-colors">{industry.name}</span>
-                        </Link>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-
-              <Link href="#" className="text-sm font-medium text-secondary hover:text-primary transition-colors">Insights</Link>
-              <Link href="#" className="text-sm font-medium text-secondary hover:text-primary transition-colors">About Us</Link>
-              
-              <button onClick={toggleModal} className="bg-primary text-white px-6 py-2.5 rounded text-sm font-medium hover:bg-primary/90 transition-colors shadow-md hover:shadow-lg transition-all">
-                Schedule Consultation
-              </button>
-            </nav>
-
-            {/* Mobile Menu Button */}
-            <button className="lg:hidden text-primary z-50 relative" onClick={toggleMobileMenu}>
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        {/* Desktop Navigation */}
+        <nav className="hidden-mobile" style={{ display: 'flex', gap: '3rem', alignItems: 'center', height: '100%', zIndex: 51 }}>
+          {Object.keys(menuData).map((item) => (
+            <div 
+              key={item} 
+              style={{ height: '100%', display: 'flex', alignItems: 'center' }}
+              onMouseEnter={() => handleMouseEnter(item)}
+            >
+              <a href={`#${item.toLowerCase().replace(' ', '-')}`} style={{ 
+                fontSize: '1rem', 
+                fontWeight: 500, 
+                color: activeMenu === item ? '#cbd5e1' : '#ffffff',
+                transition: 'color 0.2s ease',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.35rem',
+                textDecoration: 'none',
+                height: '100%'
+              }}>
+                {item} 
+                <span style={{ 
+                  fontSize: '0.7rem', 
+                  opacity: 0.8,
+                  transform: activeMenu === item ? 'rotate(90deg)' : 'rotate(0deg)',
+                  transition: 'transform 0.2s ease'
+                }}>▸</span>
+              </a>
+            </div>
+          ))}
+          
+          <div style={{ display: 'flex', alignItems: 'center', height: '100%', marginLeft: '1rem' }}>
+            {/* Search Icon */}
+            <button style={{ 
+              color: '#ffffff', 
+              backgroundColor: 'transparent',
+              padding: '0 1.5rem',
+              height: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              cursor: 'pointer',
+              border: 'none'
+            }}>
+              <Search size={20} strokeWidth={1.5} />
+            </button>
+            
+            {/* Divider */}
+            <div style={{ width: '1px', height: '32px', backgroundColor: 'rgba(255, 255, 255, 0.3)' }}></div>
+            
+            {/* Flag Icon */}
+            <button style={{ 
+              backgroundColor: 'transparent',
+              padding: '0 0 0 1.5rem',
+              height: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              cursor: 'pointer',
+              border: 'none'
+            }}>
+              <img src="https://flagcdn.com/w40/in.png" alt="India Flag" style={{ width: '28px', borderRadius: '2px', objectFit: 'cover' }} />
             </button>
           </div>
-        </div>
+        </nav>
 
-        {/* Mobile Menu Overlay */}
-        <AnimatePresence>
-          {mobileMenuOpen && (
-            <motion.div 
-              initial={{ opacity: 0, y: '-100%' }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: '-100%' }}
-              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className="fixed inset-0 z-40 bg-white pt-24 pb-8 px-6 flex flex-col h-screen overflow-y-auto lg:hidden"
-            >
-              <div className="flex flex-col space-y-6 flex-grow">
-                <div>
-                  <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Navigation</h4>
-                  <nav className="flex flex-col space-y-2 border-t border-gray-100 pt-2">
-                    
-                    {/* Mobile Services Accordion */}
-                    <div className="border-b border-gray-100">
-                      <button 
-                        onClick={() => setMobileServicesOpen(!mobileServicesOpen)} 
-                        className="w-full flex justify-between items-center py-4 text-2xl font-serif font-bold text-primary"
-                      >
-                        Services
-                        <ChevronDown className={`w-6 h-6 transition-transform ${mobileServicesOpen ? 'rotate-180 text-blue-600' : ''}`} />
-                      </button>
-                      <AnimatePresence>
-                        {mobileServicesOpen && (
-                          <motion.div 
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: 'auto', opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            className="overflow-hidden"
-                          >
-                            <div className="flex flex-col space-y-3 pb-6 pl-4 border-l-2 border-blue-100 ml-2">
-                              {services.map((service, idx) => (
-                                <Link key={idx} href="#" className="text-base font-medium text-secondary hover:text-primary">
-                                  {service.name}
-                                </Link>
-                              ))}
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
+        {/* Mobile Menu Toggle */}
+        <button className="show-mobile" style={{ display: 'none', backgroundColor: 'transparent', color: '#ffffff', border: 'none', cursor: 'pointer' }}>
+          <Menu size={28} />
+        </button>
+      </div>
 
-                    {/* Mobile Industries Accordion */}
-                    <div className="border-b border-gray-100">
-                      <button 
-                        onClick={() => setMobileIndustriesOpen(!mobileIndustriesOpen)} 
-                        className="w-full flex justify-between items-center py-4 text-2xl font-serif font-bold text-primary"
-                      >
-                        Industries
-                        <ChevronDown className={`w-6 h-6 transition-transform ${mobileIndustriesOpen ? 'rotate-180 text-blue-600' : ''}`} />
-                      </button>
-                      <AnimatePresence>
-                        {mobileIndustriesOpen && (
-                          <motion.div 
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: 'auto', opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            className="overflow-hidden"
-                          >
-                            <div className="flex flex-col space-y-3 pb-6 pl-4 border-l-2 border-blue-100 ml-2">
-                              {industries.map((industry, idx) => (
-                                <Link key={idx} href="#" className="text-base font-medium text-secondary hover:text-primary">
-                                  {industry.name}
-                                </Link>
-                              ))}
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
+      {/* Mega Menu Dropdown */}
+      <div 
+        className="mega-menu-container"
+        style={{
+          position: 'absolute',
+          top: '80px',
+          left: 0,
+          right: 0,
+          backgroundColor: '#ffffff',
+          boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)',
+          borderTop: '1px solid #e2e8f0',
+          opacity: activeMenu ? 1 : 0,
+          visibility: activeMenu ? 'visible' : 'hidden',
+          transform: activeMenu ? 'translateY(0)' : 'translateY(-10px)',
+          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+          zIndex: 49,
+          pointerEvents: activeMenu ? 'auto' : 'none',
+        }}
+        onMouseEnter={() => {
+          if (activeMenu) handleMouseEnter(activeMenu);
+        }}
+      >
+        {activeMenu && menuData[activeMenu] && (
+          <div className="container" style={{ display: 'flex', padding: '3rem 1.5rem', gap: '4rem' }}>
+            {/* Intro / Description */}
+            <div style={{ flex: '0 0 250px' }}>
+              <h3 style={{ 
+                fontFamily: 'var(--font-sans)', 
+                fontSize: '1.5rem', 
+                color: '#04152e', 
+                marginBottom: '1rem',
+                fontWeight: 600
+              }}>
+                {activeMenu}
+              </h3>
+              <p style={{ color: '#475569', fontSize: '0.95rem', lineHeight: 1.6 }}>
+                {menuData[activeMenu].description}
+              </p>
+            </div>
 
-                    <Link href="#" className="py-4 text-2xl font-serif font-bold text-primary border-b border-gray-100">Insights</Link>
-                    <Link href="#" className="py-4 text-2xl font-serif font-bold text-primary border-b border-gray-100">About Us</Link>
-                  </nav>
+            {/* Links Columns */}
+            <div style={{ flex: 1, display: 'flex', gap: '3rem' }}>
+              {menuData[activeMenu].columns.map((col, idx) => (
+                <div key={idx} style={{ flex: 1 }}>
+                  <h4 style={{ 
+                    fontSize: '1rem', 
+                    color: '#04152e', 
+                    fontWeight: 600, 
+                    marginBottom: '1.25rem',
+                    paddingBottom: '0.5rem',
+                    borderBottom: '2px solid #e2e8f0'
+                  }}>
+                    {col.title}
+                  </h4>
+                  <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                    {col.items.map((item, itemIdx) => (
+                      <li key={itemIdx}>
+                        <a href="#" className="mega-menu-link" style={{ 
+                          color: '#475569', 
+                          textDecoration: 'none', 
+                          fontSize: '0.9rem',
+                          transition: 'color 0.2s ease',
+                          display: 'inline-block'
+                        }}>
+                          {item}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
+              ))}
+            </div>
 
-                <div className="pt-6 mt-auto">
-                  <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Contact</h4>
-                  <div className="flex flex-col space-y-3 text-secondary">
-                    <a href="mailto:info@theindiawatch.com" className="flex items-center hover:text-primary transition-colors font-medium">
-                      <Mail className="w-5 h-5 mr-3 text-blue-600" /> info@theindiawatch.com
-                    </a>
-                    <a href="tel:+918076704267" className="flex items-center hover:text-primary transition-colors font-medium">
-                      <Phone className="w-5 h-5 mr-3 text-blue-600" /> +91 8076704267
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-8">
-                <button onClick={() => { toggleModal(); setMobileMenuOpen(false); }} className="w-full bg-primary text-white px-6 py-4 rounded text-center text-lg font-medium hover:bg-primary/90 transition-colors shadow-lg">
-                  Schedule Consultation
-                </button>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </header>
-
-      {/* Schedule Consultation Modal */}
-      <AnimatePresence>
-        {modalOpen && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
-            <motion.div 
-              initial={{ opacity: 0 }} 
-              animate={{ opacity: 1 }} 
-              exit={{ opacity: 0 }} 
-              onClick={toggleModal}
-              className="absolute inset-0 bg-primary/60 backdrop-blur-sm"
-            ></motion.div>
-            
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative bg-white rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden flex flex-col md:flex-row z-10"
-            >
-              <button 
-                onClick={toggleModal}
-                className="absolute top-4 right-4 text-gray-400 hover:text-primary transition-colors z-20 bg-white/50 backdrop-blur rounded-full p-1"
-              >
-                <X className="w-6 h-6" />
-              </button>
-
-              <div className="md:w-2/5 bg-surface p-8 flex flex-col justify-between hidden md:flex">
-                <div>
-                  <h3 className="text-2xl font-serif font-bold text-primary mb-4">Strategic Clarity Awaits.</h3>
-                  <p className="text-sm text-secondary leading-relaxed">Schedule a one-on-one session with our senior advisory team to discuss your market objectives.</p>
-                </div>
-                <div className="space-y-4 text-sm text-secondary">
-                  <div className="flex items-center"><Calendar className="w-4 h-4 mr-3 text-blue-600"/> 30-Minute Intro</div>
-                  <div className="flex items-center"><Phone className="w-4 h-4 mr-3 text-blue-600"/> Virtual or Phone</div>
-                  <div className="flex items-center"><Mail className="w-4 h-4 mr-3 text-blue-600"/> info@theindiawatch.com</div>
-                </div>
-              </div>
-
-              <div className="md:w-3/5 p-8 bg-white relative z-10">
-                <h3 className="text-xl font-bold text-primary mb-6 md:hidden">Request Consultation</h3>
-                <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-                  <div>
-                    <label className="block text-xs font-semibold text-secondary uppercase tracking-wider mb-2">Full Name</label>
-                    <input type="text" className="w-full px-4 py-2 border border-gray-200 rounded focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors" placeholder="John Doe" />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-secondary uppercase tracking-wider mb-2">Corporate Email</label>
-                    <input type="email" className="w-full px-4 py-2 border border-gray-200 rounded focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors" placeholder="john@company.com" />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-secondary uppercase tracking-wider mb-2">Company / Organization</label>
-                    <input type="text" className="w-full px-4 py-2 border border-gray-200 rounded focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors" placeholder="Acme Corp" />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold text-secondary uppercase tracking-wider mb-2">Area of Interest</label>
-                    <select className="w-full px-4 py-2 border border-gray-200 rounded focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors text-primary">
-                      <option>Market Entry Strategy</option>
-                      <option>Feasibility Study</option>
-                      <option>Business Research</option>
-                      <option>Other</option>
-                    </select>
-                  </div>
-                  <button className="w-full bg-primary text-white py-3 rounded font-medium hover:bg-primary/90 transition-colors flex justify-center items-center mt-6">
-                    Submit Request <ArrowRight className="w-4 h-4 ml-2" />
-                  </button>
-                </form>
-              </div>
-            </motion.div>
+            {/* Featured Section */}
+            <div style={{ flex: '0 0 300px', backgroundColor: '#f8fafc', padding: '2rem', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+              <span style={{ 
+                display: 'inline-block', 
+                fontSize: '0.75rem', 
+                fontWeight: 700, 
+                textTransform: 'uppercase', 
+                letterSpacing: '0.05em', 
+                color: '#0ea5e9',
+                marginBottom: '0.75rem'
+              }}>
+                {menuData[activeMenu].featured.title}
+              </span>
+              <p style={{ color: '#0f172a', fontWeight: 500, fontSize: '1rem', lineHeight: 1.5, marginBottom: '1.5rem' }}>
+                {menuData[activeMenu].featured.desc}
+              </p>
+              <a href="#" style={{ 
+                display: 'inline-flex', 
+                alignItems: 'center', 
+                gap: '0.5rem', 
+                color: '#0ea5e9', 
+                fontWeight: 600, 
+                fontSize: '0.9rem',
+                textDecoration: 'none' 
+              }}>
+                {menuData[activeMenu].featured.action} <ArrowRight size={16} />
+              </a>
+            </div>
           </div>
         )}
-      </AnimatePresence>
-    </>
+      </div>
+
+      <style dangerouslySetInnerHTML={{__html: `
+        @media (max-width: 992px) {
+          .hidden-mobile { display: none !important; }
+          .show-mobile { display: block !important; }
+          .mega-menu-container { display: none !important; }
+        }
+        
+        .mega-menu-link:hover {
+          color: #0ea5e9 !important;
+          transform: translateX(4px);
+        }
+      `}} />
+    </header>
   );
 }
