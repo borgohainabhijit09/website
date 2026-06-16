@@ -1,4 +1,5 @@
 "use client";
+import React from 'react';
 import { Mail, MapPin } from 'lucide-react';
 
 const LinkedinIcon = ({ size = 20, color = "currentColor" }) => (
@@ -17,78 +18,86 @@ const TwitterIcon = ({ size = 20, color = "currentColor" }) => (
 
 export default function Footer() {
   return (
-    <footer style={{ backgroundColor: '#051324', color: '#94A3B8', paddingTop: '4rem', paddingBottom: '2rem' }}>
+    <footer style={{ backgroundColor: '#020817', color: '#94a3b8', paddingTop: '6rem', paddingBottom: '2rem', borderTop: '1px solid rgba(255, 255, 255, 0.05)' }}>
       <div className="container">
-        <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '3rem', marginBottom: '4rem' }}>
-          <div style={{ gridColumn: '1 / -1', maxWidth: '400px' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4rem', justifyContent: 'space-between', marginBottom: '5rem' }}>
+          
+          {/* Brand Column */}
+          <div style={{ flex: '1 1 300px', maxWidth: '400px' }}>
             <div style={{ 
-              fontFamily: 'var(--font-heading)', 
               fontSize: '1.5rem', 
-              fontWeight: 800, 
-              color: 'var(--color-white)',
-              letterSpacing: '-0.02em',
-              lineHeight: 1,
-              marginBottom: '1rem'
+              fontWeight: 300, 
+              color: '#ffffff',
+              letterSpacing: '0.05em',
+              marginBottom: '1.5rem'
             }}>
-              THE INDIA <span style={{ color: 'var(--color-accent)' }}>WATCH</span>
+              the india <span style={{ color: '#0ea5e9', fontWeight: 600 }}>watch</span><sup style={{fontSize: '0.5rem', marginLeft: '0.1rem', color: '#64748b'}}>®</sup>
             </div>
-            <p className="body-regular" style={{ marginBottom: '1.5rem' }}>
-              Strategic market research and business intelligence equipping leaders to navigate and win in India.
+            <p style={{ fontSize: '0.95rem', lineHeight: 1.6, marginBottom: '2rem', color: '#64748b' }}>
+              Strategic market research and business intelligence equipping leaders to navigate and win in India's complex markets.
             </p>
             <div style={{ display: 'flex', gap: '1rem' }}>
-              <a href="#" style={{ color: '#94A3B8', transition: 'color 0.2s' }} onMouseOver={(e) => e.currentTarget.style.color = 'var(--color-accent)'} onMouseOut={(e) => e.currentTarget.style.color = '#94A3B8'}><LinkedinIcon size={20} /></a>
-              <a href="#" style={{ color: '#94A3B8', transition: 'color 0.2s' }} onMouseOver={(e) => e.currentTarget.style.color = 'var(--color-accent)'} onMouseOut={(e) => e.currentTarget.style.color = '#94A3B8'}><TwitterIcon size={20} /></a>
-              <a href="#" style={{ color: '#94A3B8', transition: 'color 0.2s' }} onMouseOver={(e) => e.currentTarget.style.color = 'var(--color-accent)'} onMouseOut={(e) => e.currentTarget.style.color = '#94A3B8'}><Mail size={20} /></a>
+              <a href="#" style={{ 
+                display: 'flex', alignItems: 'center', justifyContent: 'center', width: '36px', height: '36px', borderRadius: '50%', border: '1px solid rgba(255,255,255,0.1)', color: '#94a3b8', transition: 'all 0.3s ease'
+              }} onMouseOver={(e) => { e.currentTarget.style.color = '#ffffff'; e.currentTarget.style.borderColor = '#0ea5e9'; e.currentTarget.style.backgroundColor = 'rgba(14, 165, 233, 0.1)'; }} onMouseOut={(e) => { e.currentTarget.style.color = '#94a3b8'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'; e.currentTarget.style.backgroundColor = 'transparent'; }}><LinkedinIcon size={16} /></a>
+              <a href="#" style={{ 
+                display: 'flex', alignItems: 'center', justifyContent: 'center', width: '36px', height: '36px', borderRadius: '50%', border: '1px solid rgba(255,255,255,0.1)', color: '#94a3b8', transition: 'all 0.3s ease'
+              }} onMouseOver={(e) => { e.currentTarget.style.color = '#ffffff'; e.currentTarget.style.borderColor = '#0ea5e9'; e.currentTarget.style.backgroundColor = 'rgba(14, 165, 233, 0.1)'; }} onMouseOut={(e) => { e.currentTarget.style.color = '#94a3b8'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'; e.currentTarget.style.backgroundColor = 'transparent'; }}><TwitterIcon size={16} /></a>
             </div>
           </div>
           
-          <div>
-            <h4 style={{ color: 'var(--color-white)', fontSize: '1rem', fontWeight: 600, marginBottom: '1.5rem' }}>Services</h4>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-              {['Market Research', 'Feasibility Studies', 'India Market Entry', 'Competitive Intelligence', 'Business Advisory'].map(item => (
-                <li key={item}><a href="#" style={{ transition: 'color 0.2s' }} onMouseOver={(e) => e.currentTarget.style.color = 'var(--color-white)'} onMouseOut={(e) => e.currentTarget.style.color = '#94A3B8'}>{item}</a></li>
-              ))}
-            </ul>
-          </div>
-          
-          <div>
-            <h4 style={{ color: 'var(--color-white)', fontSize: '1rem', fontWeight: 600, marginBottom: '1.5rem' }}>Industries</h4>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-              {['Manufacturing', 'Healthcare', 'Technology', 'Logistics', 'Retail'].map(item => (
-                <li key={item}><a href="#" style={{ transition: 'color 0.2s' }} onMouseOver={(e) => e.currentTarget.style.color = 'var(--color-white)'} onMouseOut={(e) => e.currentTarget.style.color = '#94A3B8'}>{item}</a></li>
-              ))}
-            </ul>
-          </div>
-          
-          <div>
-            <h4 style={{ color: 'var(--color-white)', fontSize: '1rem', fontWeight: 600, marginBottom: '1.5rem' }}>Contact</h4>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              <li style={{ display: 'flex', gap: '0.5rem', alignItems: 'flex-start' }}>
-                <MapPin size={18} style={{ flexShrink: 0, marginTop: '0.25rem' }} />
-                <span>New Delhi, India<br/>110001</span>
-              </li>
-              <li style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-                <Mail size={18} style={{ flexShrink: 0 }} />
-                <span>info@theindiawatch.com</span>
-              </li>
-            </ul>
+          {/* Links Columns */}
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4rem', flex: '2 1 400px' }}>
+            <div style={{ flex: '1 1 150px' }}>
+              <h4 style={{ color: '#ffffff', fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1.5rem' }}>Services</h4>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                {['Market Research', 'Feasibility Studies', 'India Market Entry', 'Business Advisory'].map(item => (
+                  <li key={item}><a href="#" style={{ color: '#64748b', textDecoration: 'none', fontSize: '0.95rem', transition: 'color 0.2s' }} onMouseOver={(e) => e.currentTarget.style.color = '#0ea5e9'} onMouseOut={(e) => e.currentTarget.style.color = '#64748b'}>{item}</a></li>
+                ))}
+              </ul>
+            </div>
+            
+            <div style={{ flex: '1 1 150px' }}>
+              <h4 style={{ color: '#ffffff', fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1.5rem' }}>Industries</h4>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                {['Manufacturing', 'Healthcare', 'Technology', 'Logistics'].map(item => (
+                  <li key={item}><a href="#" style={{ color: '#64748b', textDecoration: 'none', fontSize: '0.95rem', transition: 'color 0.2s' }} onMouseOver={(e) => e.currentTarget.style.color = '#0ea5e9'} onMouseOut={(e) => e.currentTarget.style.color = '#64748b'}>{item}</a></li>
+                ))}
+              </ul>
+            </div>
+
+            <div style={{ flex: '1 1 200px' }}>
+              <h4 style={{ color: '#ffffff', fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1.5rem' }}>Contact</h4>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                <li style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
+                  <MapPin size={18} color="#0ea5e9" style={{ flexShrink: 0, marginTop: '0.1rem' }} />
+                  <span style={{ fontSize: '0.95rem', color: '#64748b', lineHeight: 1.5 }}>New Delhi, India<br/>110001</span>
+                </li>
+                <li style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+                  <Mail size={18} color="#0ea5e9" style={{ flexShrink: 0 }} />
+                  <span style={{ fontSize: '0.95rem', color: '#64748b' }}>info@theindiawatch.com</span>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
         
+        {/* Bottom Bar */}
         <div style={{ 
-          borderTop: '1px solid #1E293B', 
+          borderTop: '1px solid rgba(255, 255, 255, 0.05)', 
           paddingTop: '2rem', 
           display: 'flex', 
           justifyContent: 'space-between',
           alignItems: 'center',
           flexWrap: 'wrap',
-          gap: '1rem',
-          fontSize: '0.875rem'
+          gap: '1.5rem',
+          fontSize: '0.85rem',
+          color: '#64748b'
         }}>
           <div>&copy; {new Date().getFullYear()} The India Watch. All rights reserved.</div>
-          <div style={{ display: 'flex', gap: '1.5rem' }}>
-            <a href="#" style={{ transition: 'color 0.2s' }} onMouseOver={(e) => e.currentTarget.style.color = 'var(--color-white)'} onMouseOut={(e) => e.currentTarget.style.color = '#94A3B8'}>Privacy Policy</a>
-            <a href="#" style={{ transition: 'color 0.2s' }} onMouseOver={(e) => e.currentTarget.style.color = 'var(--color-white)'} onMouseOut={(e) => e.currentTarget.style.color = '#94A3B8'}>Terms of Service</a>
+          <div style={{ display: 'flex', gap: '2rem' }}>
+            <a href="#" style={{ color: '#64748b', textDecoration: 'none', transition: 'color 0.2s' }} onMouseOver={(e) => e.currentTarget.style.color = '#ffffff'} onMouseOut={(e) => e.currentTarget.style.color = '#64748b'}>Privacy Policy</a>
+            <a href="#" style={{ color: '#64748b', textDecoration: 'none', transition: 'color 0.2s' }} onMouseOver={(e) => e.currentTarget.style.color = '#ffffff'} onMouseOut={(e) => e.currentTarget.style.color = '#64748b'}>Terms of Service</a>
           </div>
         </div>
       </div>

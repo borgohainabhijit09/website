@@ -42,8 +42,6 @@ export default function Home() {
         <FeaturedInsights />
         <IndustriesWeServe />
         <ClientSuccessStories />
-        <ResearchMethodology />
-        <AboutUs />
         <FinalCTA />
       </main>
       <Footer />

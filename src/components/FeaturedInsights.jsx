@@ -1,75 +1,194 @@
 "use client";
+import React, { useRef } from 'react';
 import { ArrowRight, ArrowLeft } from 'lucide-react';
 
 export default function FeaturedInsights() {
+  const scrollContainerRef = useRef(null);
+
   const insights = [
     { title: 'Indian EV Market Outlook: Opportunities', tag: 'WHITE PAPER', readTime: '5 min read', desc: 'A detailed breakdown of the supply chain, regulatory landscape, and domestic competition in the emerging electric vehicle sector in India.' },
     { title: 'CIO Insights Report 2026', tag: 'SURVEY', readTime: '8 min read', desc: 'Understanding how CIOs are navigating digital transformation, AI adoption, and cybersecurity in the Indian enterprise landscape.' },
     { title: 'Healthcare Opportunities Post-Pandemic', tag: 'WHITE PAPER', readTime: '6 min read', desc: 'Analyzing the shift towards digital health platforms, telemedicine adoption, and the growth of Tier 2 city healthcare infrastructure.' },
-    { title: 'Consumer Behavior Shifts in Tier 2 Cities', tag: 'INSIGHT PAPER', readTime: '4 min read', desc: 'How rising disposable incomes and digital penetration are reshaping retail strategies for FMCG brands across India.' }
+    { title: 'Consumer Behavior Shifts in Tier 2 Cities', tag: 'INSIGHT PAPER', readTime: '4 min read', desc: 'How rising disposable incomes and digital penetration are reshaping retail strategies for FMCG brands across India.' },
+    { title: 'The Future of Fintech Regulations', tag: 'REPORT', readTime: '7 min read', desc: 'Navigating the new compliance mandates and open banking frameworks issued by the RBI for digital lending.' }
   ];
 
-  return (
-    <section className="section-padding" style={{ backgroundColor: 'var(--color-surface)' }}>
-      <div className="container">
-        <h2 className="headline-medium" style={{ fontSize: '2rem', fontWeight: 400, color: 'var(--color-primary)', marginBottom: '3rem' }}>
-          Featured insights
-        </h2>
+  const scroll = (direction) => {
+    if (scrollContainerRef.current) {
+      const scrollAmount = 360; // Card width + gap
+      scrollContainerRef.current.scrollBy({ 
+        left: direction === 'left' ? -scrollAmount : scrollAmount, 
+        behavior: 'smooth' 
+      });
+    }
+  };
 
-        <div style={{ display: 'flex', gap: '1.5rem', overflowX: 'auto', paddingBottom: '2rem' }}>
+  return (
+    <section className="section-padding" style={{ backgroundColor: '#f1f5f9', padding: '6rem 0' }}>
+      <div className="container">
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '3rem' }}>
+          <h2 className="headline-medium" style={{ fontSize: '2.5rem', fontWeight: 300, color: '#0f172a', margin: 0, letterSpacing: '-0.02em' }}>
+            Featured insights
+          </h2>
+          <a href="#" style={{ 
+            color: '#2563eb', 
+            fontWeight: 600, 
+            fontSize: '1rem', 
+            textDecoration: 'none', 
+            display: 'inline-flex', 
+            alignItems: 'center', 
+            gap: '0.25rem' 
+          }}
+          onMouseOver={(e) => e.currentTarget.style.color = '#1d4ed8'}
+          onMouseOut={(e) => e.currentTarget.style.color = '#2563eb'}
+          >
+            View All <ArrowRight size={16} />
+          </a>
+        </div>
+
+        <div ref={scrollContainerRef} className="insights-carousel" style={{ 
+          display: 'flex', 
+          gap: '2rem', 
+          overflowX: 'auto', 
+          paddingBottom: '2.5rem',
+          scrollbarWidth: 'none', /* Firefox */
+          msOverflowStyle: 'none', /* IE 10+ */
+          paddingLeft: '0.25rem',
+          paddingRight: '0.25rem',
+          paddingTop: '0.5rem',
+          scrollBehavior: 'smooth'
+        }}>
           {insights.map((insight, index) => (
-            <div key={index} style={{
+            <div key={index} className="insight-card" style={{
               flex: '0 0 auto',
-              width: '320px',
-              backgroundColor: 'var(--color-white)',
+              width: '340px',
+              backgroundColor: '#ffffff',
               display: 'flex',
               flexDirection: 'column',
-              position: 'relative'
-            }}>
+              position: 'relative',
+              borderRadius: '8px',
+              overflow: 'hidden',
+              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)',
+              transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+              cursor: 'pointer',
+              border: '1px solid #e2e8f0'
+            }}
+            onMouseOver={(e) => {
+              e.currentTarget.style.transform = 'translateY(-6px)';
+              e.currentTarget.style.boxShadow = '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)';
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)';
+            }}
+            >
               <div style={{
-                height: '180px',
+                height: '190px',
                 backgroundImage: 'url(/images/insight.png)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
-                position: 'relative'
+                position: 'relative',
+                backgroundColor: '#0f172a'
               }}>
                 <div style={{
                   position: 'absolute',
                   top: '1rem',
-                  left: 0,
-                  backgroundColor: 'var(--color-white)',
-                  color: '#EA580C',
-                  padding: '0.25rem 0.75rem',
+                  left: '1rem',
+                  backgroundColor: '#ea580c',
+                  color: '#ffffff',
+                  padding: '0.35rem 0.85rem',
                   fontSize: '0.75rem',
                   fontWeight: 700,
                   textTransform: 'uppercase',
-                  border: '1px solid #EA580C',
-                  borderLeft: 'none'
+                  borderRadius: '4px',
+                  letterSpacing: '0.05em',
+                  boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
                 }}>
                   {insight.tag}
                 </div>
               </div>
-              <div style={{ padding: '1.5rem 1rem', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
-                <h3 style={{ fontSize: '1.125rem', marginBottom: '1rem', color: 'var(--color-primary)', lineHeight: 1.3, minHeight: '3rem' }}>{insight.title}</h3>
-                <div style={{ color: 'var(--color-text-light)', fontSize: '0.75rem', marginBottom: '1rem' }}>{insight.readTime}</div>
-                <p className="body-regular" style={{ color: 'var(--color-text-dark)', fontSize: '0.875rem', lineHeight: 1.5, margin: 0 }}>
+              <div style={{ padding: '1.75rem 1.5rem', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
+                <div style={{ color: '#64748b', fontSize: '0.8rem', fontWeight: 500, marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                  {insight.readTime}
+                </div>
+                <h3 style={{ fontSize: '1.2rem', marginBottom: '1rem', color: '#0f172a', lineHeight: 1.4, minHeight: '3.3rem', fontWeight: 700 }}>
+                  {insight.title}
+                </h3>
+                <p style={{ color: '#475569', fontSize: '0.95rem', lineHeight: 1.6, margin: 0, flexGrow: 1 }}>
                   {insight.desc}
                 </p>
+                <div style={{ marginTop: '1.5rem', color: '#2563eb', fontWeight: 600, fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                  Read Article <ArrowRight size={14} />
+                </div>
               </div>
             </div>
           ))}
         </div>
         
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '1rem', marginTop: '1rem' }}>
-          <button style={{ color: '#94A3B8', backgroundColor: 'transparent' }}><ArrowLeft size={24} /></button>
+        {/* Navigation Controls */}
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '1.5rem', marginTop: '1rem' }}>
+          <button 
+            onClick={() => scroll('left')}
+            style={{ 
+              color: '#64748b', 
+              backgroundColor: '#ffffff', 
+              border: '1px solid #cbd5e1', 
+              borderRadius: '50%', 
+              width: '40px', 
+              height: '40px', 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center',
+              cursor: 'pointer',
+              transition: 'all 0.2s ease'
+            }}
+            onMouseOver={(e) => { e.currentTarget.style.backgroundColor = '#f1f5f9'; e.currentTarget.style.color = '#0f172a'; }}
+            onMouseOut={(e) => { e.currentTarget.style.backgroundColor = '#ffffff'; e.currentTarget.style.color = '#64748b'; }}
+          >
+            <ArrowLeft size={20} />
+          </button>
+          
           <div style={{ display: 'flex', gap: '0.5rem' }}>
-            {[1,2,3,4,5,6].map(i => (
-              <div key={i} style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: i === 1 ? 'var(--color-primary)' : '#CBD5E1' }}></div>
+            {[1,2,3,4].map(i => (
+              <div key={i} style={{ 
+                width: i === 1 ? '24px' : '8px', 
+                height: '8px', 
+                borderRadius: '4px', 
+                backgroundColor: i === 1 ? '#ea580c' : '#cbd5e1',
+                transition: 'width 0.3s ease, background-color 0.3s ease'
+              }}></div>
             ))}
           </div>
-          <button style={{ color: 'var(--color-primary)', backgroundColor: 'transparent' }}><ArrowRight size={24} /></button>
+          
+          <button 
+            onClick={() => scroll('right')}
+            style={{ 
+              color: '#64748b', 
+              backgroundColor: '#ffffff', 
+              border: '1px solid #cbd5e1', 
+              borderRadius: '50%', 
+              width: '40px', 
+              height: '40px', 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center',
+              cursor: 'pointer',
+              transition: 'all 0.2s ease'
+            }}
+            onMouseOver={(e) => { e.currentTarget.style.backgroundColor = '#f1f5f9'; e.currentTarget.style.color = '#0f172a'; }}
+            onMouseOut={(e) => { e.currentTarget.style.backgroundColor = '#ffffff'; e.currentTarget.style.color = '#64748b'; }}
+          >
+            <ArrowRight size={20} />
+          </button>
         </div>
       </div>
+
+      <style dangerouslySetInnerHTML={{__html: `
+        .insights-carousel::-webkit-scrollbar {
+          display: none;
+        }
+      `}} />
     </section>
   );
 }

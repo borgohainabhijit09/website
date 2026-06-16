@@ -7,7 +7,23 @@ export default function WhatsAppIcon() {
       href="https://wa.me/918076704267"
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 bg-[#25D366] rounded-full shadow-lg hover:bg-[#20b858] transition-colors"
+      style={{
+        position: 'fixed',
+        bottom: '1.5rem',
+        right: '1.5rem',
+        zIndex: 50,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '3.5rem',
+        height: '3.5rem',
+        backgroundColor: '#25D366',
+        borderRadius: '9999px',
+        boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+        transition: 'background-color 0.3s ease'
+      }}
+      onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#20b858'}
+      onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#25D366'}
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ type: "spring", stiffness: 260, damping: 20, delay: 0.5 }}
