@@ -13,9 +13,20 @@ export default function FeaturedInsights() {
     { title: 'The Future of Fintech Regulations', tag: 'REPORT', readTime: '7 min read', desc: 'Navigating the new compliance mandates and open banking frameworks issued by the RBI for digital lending.' }
   ];
 
+  const [activeDot, setActiveDot] = React.useState(0);
+
+  const handleScroll = () => {
+    if (scrollContainerRef.current) {
+      const scrollLeft = scrollContainerRef.current.scrollLeft;
+      const cardWidth = 372; // 340px width + 32px gap
+      const newIndex = Math.round(scrollLeft / cardWidth);
+      setActiveDot(newIndex);
+    }
+  };
+
   const scroll = (direction) => {
     if (scrollContainerRef.current) {
-      const scrollAmount = 360; // Card width + gap
+      const scrollAmount = 372;
       scrollContainerRef.current.scrollBy({ 
         left: direction === 'left' ? -scrollAmount : scrollAmount, 
         behavior: 'smooth' 
@@ -46,7 +57,7 @@ export default function FeaturedInsights() {
           </a>
         </div>
 
-        <div ref={scrollContainerRef} className="insights-carousel" style={{ 
+        <div ref={scrollContainerRef} onScroll={handleScroll} className="insights-carousel" style={{ 
           display: 'flex', 
           gap: '2rem', 
           overflowX: 'auto', 
@@ -150,12 +161,12 @@ export default function FeaturedInsights() {
           </button>
           
           <div style={{ display: 'flex', gap: '0.5rem' }}>
-            {[1,2,3,4].map(i => (
+            {insights.map((_, i) => (
               <div key={i} style={{ 
-                width: i === 1 ? '24px' : '8px', 
+                width: i === activeDot ? '24px' : '8px', 
                 height: '8px', 
                 borderRadius: '4px', 
-                backgroundColor: i === 1 ? '#ea580c' : '#cbd5e1',
+                backgroundColor: i === activeDot ? '#ea580c' : '#cbd5e1',
                 transition: 'width 0.3s ease, background-color 0.3s ease'
               }}></div>
             ))}

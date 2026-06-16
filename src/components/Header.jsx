@@ -1,86 +1,74 @@
 "use client";
 import React, { useState, useRef } from 'react';
-import { Menu, Search, ArrowRight } from 'lucide-react';
+import Link from 'next/link';
+import { Menu, X, Search, ArrowRight } from 'lucide-react';
+
+const createSlug = (text) => {
+  return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+};
 
 const menuData = {
-  'Solutions': {
-    description: "Transform your business with our comprehensive suite of consulting services tailored for the modern enterprise.",
+  'About Us': {
+    description: "Discover who we are, our core values, and the leadership team driving our vision forward.",
     columns: [
       {
-        title: "Strategy",
-        items: ["Business Transformation", "Digital Strategy", "Market Entry", "M&A Advisory"]
-      },
+        title: "About Us & Leadership",
+        items: ["Company Overview", "Leadership Profiles", "Vision & Mission"]
+      }
+    ],
+    featured: {
+      title: "Our Mission",
+      desc: "We are committed to delivering exceptional value to our clients and equipping them with actionable intelligence.",
+      action: "Learn More"
+    }
+  },
+  'Services': {
+    description: "Transform your business with our comprehensive suite of research and advisory services tailored for the Indian market.",
+    columns: [
       {
-        title: "Operations",
-        items: ["Supply Chain Optimization", "Process Engineering", "Cost Reduction", "Organizational Design"]
-      },
-      {
-        title: "Technology",
-        items: ["Cloud Migration", "Data & Analytics", "Cybersecurity", "Enterprise Architecture"]
+        title: "Services Module",
+        items: [
+          "Business Research & Advisory", 
+          "Market Research Services", 
+          "Strategic Communication Services", 
+          "Feasibility Studies", 
+          "India Market Entry Services", 
+          "Business Plans & Pitch Decks"
+        ]
       }
     ],
     featured: {
       title: "Featured Service",
-      desc: "Accelerate your AI transformation journey with our new GenAI framework.",
-      action: "Learn More"
+      desc: "Navigate complex regulations and launch successfully with our India Market Entry Services.",
+      action: "Explore Service"
     }
   },
   'Industries': {
-    description: "Deep expertise across key sectors driving the global economy forward.",
+    description: "Deep expertise and actionable intelligence across key sectors driving the Indian economy forward.",
     columns: [
       {
-        title: "Financial Services",
-        items: ["Banking & Markets", "Insurance", "Wealth Management", "FinTech"]
-      },
-      {
-        title: "Healthcare",
-        items: ["Providers", "Life Sciences", "Digital Health", "Medical Devices"]
-      },
-      {
-        title: "Consumer & Retail",
-        items: ["E-commerce", "FMCG", "Retail Operations", "Consumer Goods"]
+        title: "Industries Module",
+        items: ["Manufacturing", "Infrastructure", "Retail", "ICT", "Services", "Public Policy"]
       }
     ],
     featured: {
-      title: "Industry Insights",
-      desc: "Read our latest 2024 report on the future of healthcare technology and patient care.",
-      action: "Read Report"
+      title: "Industry Focus",
+      desc: "Discover how the manufacturing landscape in India is transforming under new policies.",
+      action: "Read Analysis"
     }
   },
-  'About Us': {
-    description: "Discover who we are, our core values, and the impact we create globally.",
+  'Insights & Research': {
+    description: "Actionable market intelligence, reports, and analysis to help you navigate and win in India.",
     columns: [
       {
-        title: "Our Firm",
-        items: ["Leadership Team", "Global Locations", "Our History", "Corporate Governance"]
-      },
-      {
-        title: "Our Impact",
-        items: ["Sustainability (ESG)", "Diversity & Inclusion", "Community Engagement", "Client Success Stories"]
+        title: "Insights & Research Module",
+        items: ["Market Analysis", "Research Reports", "Publications", "Industry Insights"]
       }
     ],
     featured: {
-      title: "Join Our Mission",
-      desc: "We are committed to delivering exceptional value to our clients and society.",
-      action: "Our Vision"
-    }
-  },
-  'Careers': {
-    description: "Build a rewarding career solving the world's most complex challenges.",
-    columns: [
-      {
-        title: "Opportunities",
-        items: ["Experienced Professionals", "Students & Graduates", "Internships", "Alumni Network"]
-      },
-      {
-        title: "Life at the Firm",
-        items: ["Culture & Values", "Learning & Development", "Benefits & Wellbeing", "Career Paths"]
-      }
-    ],
-    featured: {
-      title: "Hot Roles",
-      desc: "We are actively hiring for Data Scientists and Strategy Consultants globally.",
-      action: "View Openings"
+      title: "Latest Report",
+      desc: "The 2024 India Market Entry Guide for foreign investors and multinational corporations.",
+      action: "Download Guide"
     }
   }
 };
@@ -88,6 +76,8 @@ const menuData = {
 export default function Header() {
   const [activeMenu, setActiveMenu] = useState(null);
   const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [expandedMobileMenu, setExpandedMobileMenu] = useState(null);
   const timeoutRef = useRef(null);
 
   React.useEffect(() => {
@@ -214,8 +204,12 @@ export default function Header() {
         </nav>
 
         {/* Mobile Menu Toggle */}
-        <button className="show-mobile" style={{ display: 'none', backgroundColor: 'transparent', color: '#ffffff', border: 'none', cursor: 'pointer' }}>
-          <Menu size={28} />
+        <button 
+          className="show-mobile" 
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          style={{ display: 'none', backgroundColor: 'transparent', color: '#ffffff', border: 'none', cursor: 'pointer', zIndex: 51 }}
+        >
+          {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
 
@@ -225,14 +219,18 @@ export default function Header() {
         style={{
           position: 'absolute',
           top: '80px',
-          left: 0,
-          right: 0,
-          backgroundColor: '#ffffff',
-          boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)',
-          borderTop: '1px solid #e2e8f0',
+          left: '50%',
+          width: 'calc(100% - 2rem)',
+          maxWidth: '1100px',
+          backgroundColor: 'rgba(2, 8, 23, 0.98)',
+          backdropFilter: 'blur(16px)',
+          boxShadow: '0 20px 40px -10px rgba(0, 0, 0, 0.5)',
+          border: '1px solid rgba(255, 255, 255, 0.05)',
+          borderTop: 'none',
+          borderRadius: '0 0 16px 16px',
           opacity: activeMenu ? 1 : 0,
           visibility: activeMenu ? 'visible' : 'hidden',
-          transform: activeMenu ? 'translateY(0)' : 'translateY(-10px)',
+          transform: activeMenu ? 'translate(-50%, 0)' : 'translate(-50%, -10px)',
           transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
           zIndex: 49,
           pointerEvents: activeMenu ? 'auto' : 'none',
@@ -242,19 +240,20 @@ export default function Header() {
         }}
       >
         {activeMenu && menuData[activeMenu] && (
-          <div className="container" style={{ display: 'flex', padding: '3rem 1.5rem', gap: '4rem' }}>
+          <div style={{ display: 'flex', padding: '3rem 2.5rem', gap: '3rem' }}>
             {/* Intro / Description */}
-            <div style={{ flex: '0 0 250px' }}>
+            <div style={{ flex: '0 0 260px' }}>
               <h3 style={{ 
                 fontFamily: 'var(--font-sans)', 
-                fontSize: '1.5rem', 
-                color: '#04152e', 
+                fontSize: '1.75rem', 
+                color: '#ffffff', 
                 marginBottom: '1rem',
-                fontWeight: 600
+                fontWeight: 300,
+                letterSpacing: '-0.02em'
               }}>
                 {activeMenu}
               </h3>
-              <p style={{ color: '#475569', fontSize: '0.95rem', lineHeight: 1.6 }}>
+              <p style={{ color: '#94a3b8', fontSize: '0.95rem', lineHeight: 1.6 }}>
                 {menuData[activeMenu].description}
               </p>
             </div>
@@ -264,59 +263,98 @@ export default function Header() {
               {menuData[activeMenu].columns.map((col, idx) => (
                 <div key={idx} style={{ flex: 1 }}>
                   <h4 style={{ 
-                    fontSize: '1rem', 
-                    color: '#04152e', 
+                    fontSize: '0.85rem', 
+                    color: '#ffffff', 
                     fontWeight: 600, 
                     marginBottom: '1.25rem',
-                    paddingBottom: '0.5rem',
-                    borderBottom: '2px solid #e2e8f0'
+                    paddingBottom: '0.75rem',
+                    borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.05em'
                   }}>
                     {col.title}
                   </h4>
-                  <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                    {col.items.map((item, itemIdx) => (
-                      <li key={itemIdx}>
-                        <a href="#" className="mega-menu-link" style={{ 
-                          color: '#475569', 
-                          textDecoration: 'none', 
-                          fontSize: '0.9rem',
-                          transition: 'color 0.2s ease',
-                          display: 'inline-block'
-                        }}>
-                          {item}
-                        </a>
-                      </li>
-                    ))}
+                  <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                    {col.items.map((item, itemIdx) => {
+                      const sectionSlug = createSlug(activeMenu);
+                      const itemSlug = createSlug(item);
+                      const href = `/${sectionSlug}/${itemSlug}`;
+                      
+                      return (
+                        <li key={itemIdx}>
+                          <Link href={href} className="mega-menu-link" style={{ 
+                            color: '#cbd5e1', 
+                            textDecoration: 'none', 
+                            fontSize: '0.95rem',
+                            transition: 'all 0.2s ease',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '0.5rem'
+                          }}>
+                            <span style={{ 
+                              width: '4px', 
+                              height: '4px', 
+                              borderRadius: '50%', 
+                              backgroundColor: '#0ea5e9',
+                              opacity: 0.5,
+                              transition: 'all 0.2s ease'
+                            }} className="menu-dot"></span>
+                            {item}
+                          </Link>
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
               ))}
             </div>
 
             {/* Featured Section */}
-            <div style={{ flex: '0 0 300px', backgroundColor: '#f8fafc', padding: '2rem', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+            <div style={{ 
+              flex: '0 0 320px', 
+              backgroundColor: 'rgba(255, 255, 255, 0.03)', 
+              padding: '2rem', 
+              borderRadius: '12px', 
+              border: '1px solid rgba(255, 255, 255, 0.05)',
+              position: 'relative',
+              overflow: 'hidden'
+            }}>
+              <div style={{ position: 'absolute', top: 0, right: 0, width: '150px', height: '150px', background: 'radial-gradient(circle, rgba(14, 165, 233, 0.1) 0%, rgba(0, 0, 0, 0) 70%)', borderRadius: '50%' }}></div>
               <span style={{ 
-                display: 'inline-block', 
+                display: 'inline-flex', 
+                alignItems: 'center',
+                gap: '0.5rem',
                 fontSize: '0.75rem', 
-                fontWeight: 700, 
+                fontWeight: 600, 
                 textTransform: 'uppercase', 
                 letterSpacing: '0.05em', 
                 color: '#0ea5e9',
-                marginBottom: '0.75rem'
+                marginBottom: '1rem'
               }}>
+                <span style={{ display: 'inline-block', width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#0ea5e9' }}></span>
                 {menuData[activeMenu].featured.title}
               </span>
-              <p style={{ color: '#0f172a', fontWeight: 500, fontSize: '1rem', lineHeight: 1.5, marginBottom: '1.5rem' }}>
+              <p style={{ color: '#f8fafc', fontWeight: 300, fontSize: '1.1rem', lineHeight: 1.5, marginBottom: '2rem', position: 'relative', zIndex: 1 }}>
                 {menuData[activeMenu].featured.desc}
               </p>
               <a href="#" style={{ 
                 display: 'inline-flex', 
                 alignItems: 'center', 
                 gap: '0.5rem', 
-                color: '#0ea5e9', 
+                color: '#ffffff', 
+                backgroundColor: '#0ea5e9',
+                padding: '0.75rem 1.5rem',
+                borderRadius: '100px',
                 fontWeight: 600, 
                 fontSize: '0.9rem',
-                textDecoration: 'none' 
-              }}>
+                textDecoration: 'none',
+                transition: 'background-color 0.2s',
+                position: 'relative',
+                zIndex: 1
+              }}
+              onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#0284c7'}
+              onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#0ea5e9'}
+              >
                 {menuData[activeMenu].featured.action} <ArrowRight size={16} />
               </a>
             </div>
@@ -332,10 +370,101 @@ export default function Header() {
         }
         
         .mega-menu-link:hover {
-          color: #0ea5e9 !important;
-          transform: translateX(4px);
+          color: #ffffff !important;
+          transform: translateX(6px);
+        }
+        .mega-menu-link:hover .menu-dot {
+          opacity: 1 !important;
+          transform: scale(1.5);
+          box-shadow: 0 0 8px #0ea5e9;
         }
       `}} />
+
+      {/* Mobile Menu Overlay */}
+      <div style={{
+        position: 'fixed',
+        top: '80px',
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: 'rgba(4, 21, 46, 0.98)',
+        backdropFilter: 'blur(16px)',
+        zIndex: 48,
+        padding: '2rem 1.5rem',
+        overflowY: 'auto',
+        opacity: mobileMenuOpen ? 1 : 0,
+        visibility: mobileMenuOpen ? 'visible' : 'hidden',
+        transform: mobileMenuOpen ? 'translateX(0)' : 'translateX(100%)',
+        transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+        pointerEvents: mobileMenuOpen ? 'auto' : 'none'
+      }}>
+        {Object.keys(menuData).map((item) => {
+          const isExpanded = expandedMobileMenu === item;
+          return (
+            <div key={item} style={{ marginBottom: '0.5rem', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+              <button 
+                onClick={() => setExpandedMobileMenu(isExpanded ? null : item)}
+                style={{ 
+                  width: '100%', 
+                  display: 'flex', 
+                  justifyContent: 'space-between', 
+                  alignItems: 'center', 
+                  backgroundColor: 'transparent', 
+                  border: 'none', 
+                  padding: '1.25rem 0',
+                  color: isExpanded ? '#0ea5e9' : '#ffffff', 
+                  fontSize: '1.25rem',
+                  fontWeight: 400,
+                  cursor: 'pointer',
+                  transition: 'color 0.2s ease'
+                }}
+              >
+                {item}
+                <span style={{ 
+                  transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
+                  transition: 'transform 0.3s ease',
+                  fontSize: '0.8rem',
+                  opacity: 0.7
+                }}>
+                  ▼
+                </span>
+              </button>
+              
+              <div style={{ 
+                maxHeight: isExpanded ? '500px' : '0', 
+                overflow: 'hidden', 
+                transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                opacity: isExpanded ? 1 : 0,
+                paddingLeft: '0.5rem'
+              }}>
+                <ul style={{ listStyle: 'none', padding: '0 0 1.5rem 0', margin: 0, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                  {menuData[item].columns.map(col => col.items.map(subItem => {
+                    const sectionSlug = createSlug(item);
+                    const itemSlug = createSlug(subItem);
+                    const href = `/${sectionSlug}/${itemSlug}`;
+                    
+                    return (
+                      <li key={subItem}>
+                        <Link href={href} style={{ 
+                          color: '#cbd5e1', 
+                          textDecoration: 'none', 
+                          fontSize: '1rem', 
+                          display: 'flex', 
+                          alignItems: 'center', 
+                          gap: '0.5rem' 
+                        }} onClick={() => setMobileMenuOpen(false)}>
+                          <span style={{ width: '4px', height: '4px', borderRadius: '50%', backgroundColor: '#0ea5e9', opacity: 0.5 }}></span>
+                          {subItem}
+                        </Link>
+                      </li>
+                    );
+                  }))}
+                </ul>
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </header>
   );
 }

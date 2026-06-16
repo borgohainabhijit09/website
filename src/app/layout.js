@@ -2,6 +2,8 @@ import { Inter, Montserrat } from "next/font/google";
 import "./globals.css";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
 import LeadPopup from "@/components/LeadPopup";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -81,7 +83,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${inter.variable} ${montserrat.variable}`}>
       <body className="antialiased text-foreground bg-background">
+        <Header />
         {children}
+        <Footer />
         <WhatsAppIcon />
         <LeadPopup />
       </body>

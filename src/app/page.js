@@ -1,4 +1,3 @@
-import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import WhoWeHelp from '@/components/WhoWeHelp';
 import Services from '@/components/Services';
@@ -9,7 +8,6 @@ import ClientSuccessStories from '@/components/ClientSuccessStories';
 import ResearchMethodology from '@/components/ResearchMethodology';
 import AboutUs from '@/components/AboutUs';
 import FinalCTA from '@/components/FinalCTA';
-import Footer from '@/components/Footer';
 
 export default function Home() {
   const jsonLd = {
@@ -33,7 +31,6 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       
-      <Header />
       <main>
         <Hero />
         <WhoWeHelp />
@@ -44,7 +41,6 @@ export default function Home() {
         <ClientSuccessStories />
         <FinalCTA />
       </main>
-      <Footer />
     </>
   );
 }

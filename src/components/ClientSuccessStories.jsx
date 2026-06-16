@@ -38,9 +38,20 @@ export default function ClientSuccessStories() {
     }
   ];
 
+  const [activeDot, setActiveDot] = React.useState(0);
+
+  const handleScroll = () => {
+    if (scrollContainerRef.current) {
+      const scrollLeft = scrollContainerRef.current.scrollLeft;
+      const cardWidth = 372; // 340 width + 32 gap
+      const newIndex = Math.round(scrollLeft / cardWidth);
+      setActiveDot(newIndex);
+    }
+  };
+
   const scroll = (direction) => {
     if (scrollContainerRef.current) {
-      const scrollAmount = 360; // Card width + gap
+      const scrollAmount = 372; 
       scrollContainerRef.current.scrollBy({ 
         left: direction === 'left' ? -scrollAmount : scrollAmount, 
         behavior: 'smooth' 
@@ -71,7 +82,7 @@ export default function ClientSuccessStories() {
           </a>
         </div>
 
-        <div ref={scrollContainerRef} className="client-stories-carousel" style={{ 
+        <div ref={scrollContainerRef} onScroll={handleScroll} className="client-stories-carousel" style={{ 
           display: 'flex', 
           gap: '2rem', 
           overflowX: 'auto', 
@@ -158,12 +169,12 @@ export default function ClientSuccessStories() {
           </button>
           
           <div style={{ display: 'flex', gap: '0.5rem' }}>
-            {[1,2,3,4].map(i => (
+            {stories.map((_, i) => (
               <div key={i} style={{ 
-                width: i === 1 ? '24px' : '8px', 
+                width: i === activeDot ? '24px' : '8px', 
                 height: '8px', 
                 borderRadius: '4px', 
-                backgroundColor: i === 1 ? '#ea580c' : '#cbd5e1',
+                backgroundColor: i === activeDot ? '#ea580c' : '#cbd5e1',
                 transition: 'width 0.3s ease, background-color 0.3s ease'
               }}></div>
             ))}
