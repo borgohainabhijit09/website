@@ -1,6 +1,7 @@
 import { Inter, Montserrat } from "next/font/google";
 import "./globals.css";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
+import LeadPopup from "@/components/LeadPopup";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -82,6 +83,7 @@ export default function RootLayout({ children }) {
       <body className="antialiased text-foreground bg-background">
         {children}
         <WhatsAppIcon />
+        <LeadPopup />
       </body>
     </html>
   );
