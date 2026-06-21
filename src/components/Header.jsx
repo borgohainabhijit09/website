@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Menu, X, Search, ArrowRight } from 'lucide-react';
 
 const createSlug = (text) => {
@@ -28,11 +29,11 @@ const menuData = {
       {
         title: "Services Module",
         items: [
-          "Business Research & Advisory", 
-          "Market Research Services", 
-          "Strategic Communication Services", 
-          "Feasibility Studies", 
-          "India Market Entry Services", 
+          "Business Research & Advisory",
+          "Market Research Services",
+          "Strategic Communication Services",
+          "Feasibility Studies",
+          "India Market Entry Services",
           "Business Plans & Pitch Decks"
         ]
       }
@@ -100,9 +101,9 @@ export default function Header() {
   };
 
   return (
-    <header 
-      style={{ 
-        backgroundColor: scrolled ? '#04152e' : 'transparent', 
+    <header
+      style={{
+        backgroundColor: scrolled ? '#04152e' : 'transparent',
         borderBottom: scrolled ? '1px solid rgba(255, 255, 255, 0.05)' : '1px solid transparent',
         position: 'fixed',
         left: 0,
@@ -113,44 +114,25 @@ export default function Header() {
       }}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '80px', position: 'relative' }}>
+      <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '80px', position: 'relative', marginTop: '12px' }}>
         {/* Logo Section */}
-        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', zIndex: 51 }}>
-          <div style={{ 
-            fontFamily: 'var(--font-sans)', 
-            fontSize: '2.25rem', 
-            fontWeight: 400, 
-            color: '#ffffff',
-            letterSpacing: '0.01em',
-            lineHeight: 1,
-            display: 'flex',
-            alignItems: 'flex-start'
-          }}>
-            the india watch<sup style={{fontSize: '0.75rem', marginTop: '0.25rem', marginLeft: '0.1rem', color: '#cbd5e1'}}>®</sup>
-          </div>
-          <div style={{
-            color: '#ffffff',
-            fontSize: '0.8rem',
-            fontStyle: 'italic',
-            marginTop: '0.2rem',
-            letterSpacing: '0.02em',
-            opacity: 0.9
-          }}>
-            Global Business Consulting
-          </div>
+        <div style={{ display: 'flex', flexDirection: 'column', zIndex: 51, alignItems: 'flex-start' }}>
+          <Link href="/">
+            <Image src="/logo.png" alt="The India Watch Logo" width={286} height={78} style={{ objectFit: 'contain', objectPosition: 'left' }} priority />
+          </Link>
         </div>
 
         {/* Desktop Navigation */}
         <nav className="hidden-mobile" style={{ display: 'flex', gap: '3rem', alignItems: 'center', height: '100%', zIndex: 51 }}>
           {Object.keys(menuData).map((item) => (
-            <div 
-              key={item} 
+            <div
+              key={item}
               style={{ height: '100%', display: 'flex', alignItems: 'center' }}
               onMouseEnter={() => handleMouseEnter(item)}
             >
-              <a href={`#${item.toLowerCase().replace(' ', '-')}`} style={{ 
-                fontSize: '1rem', 
-                fontWeight: 500, 
+              <a href={`#${item.toLowerCase().replace(' ', '-')}`} style={{
+                fontSize: '1rem',
+                fontWeight: 500,
                 color: activeMenu === item ? '#cbd5e1' : '#ffffff',
                 transition: 'color 0.2s ease',
                 display: 'flex',
@@ -159,9 +141,9 @@ export default function Header() {
                 textDecoration: 'none',
                 height: '100%'
               }}>
-                {item} 
-                <span style={{ 
-                  fontSize: '0.7rem', 
+                {item}
+                <span style={{
+                  fontSize: '0.7rem',
                   opacity: 0.8,
                   transform: activeMenu === item ? 'rotate(90deg)' : 'rotate(0deg)',
                   transition: 'transform 0.2s ease'
@@ -169,11 +151,11 @@ export default function Header() {
               </a>
             </div>
           ))}
-          
+
           <div style={{ display: 'flex', alignItems: 'center', height: '100%', marginLeft: '1rem' }}>
             {/* Search Icon */}
-            <button style={{ 
-              color: '#ffffff', 
+            <button style={{
+              color: '#ffffff',
               backgroundColor: 'transparent',
               padding: '0 1.5rem',
               height: '100%',
@@ -184,12 +166,12 @@ export default function Header() {
             }}>
               <Search size={20} strokeWidth={1.5} />
             </button>
-            
+
             {/* Divider */}
             <div style={{ width: '1px', height: '32px', backgroundColor: 'rgba(255, 255, 255, 0.3)' }}></div>
-            
+
             {/* Flag Icon */}
-            <button style={{ 
+            <button style={{
               backgroundColor: 'transparent',
               padding: '0 0 0 1.5rem',
               height: '100%',
@@ -204,8 +186,8 @@ export default function Header() {
         </nav>
 
         {/* Mobile Menu Toggle */}
-        <button 
-          className="show-mobile" 
+        <button
+          className="show-mobile"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           style={{ display: 'none', backgroundColor: 'transparent', color: '#ffffff', border: 'none', cursor: 'pointer', zIndex: 51 }}
         >
@@ -214,7 +196,7 @@ export default function Header() {
       </div>
 
       {/* Mega Menu Dropdown */}
-      <div 
+      <div
         className="mega-menu-container"
         style={{
           position: 'absolute',
@@ -243,10 +225,10 @@ export default function Header() {
           <div style={{ display: 'flex', padding: '3rem 2.5rem', gap: '3rem' }}>
             {/* Intro / Description */}
             <div style={{ flex: '0 0 260px' }}>
-              <h3 style={{ 
-                fontFamily: 'var(--font-sans)', 
-                fontSize: '1.75rem', 
-                color: '#ffffff', 
+              <h3 style={{
+                fontFamily: 'var(--font-sans)',
+                fontSize: '1.75rem',
+                color: '#ffffff',
                 marginBottom: '1rem',
                 fontWeight: 300,
                 letterSpacing: '-0.02em'
@@ -262,10 +244,10 @@ export default function Header() {
             <div style={{ flex: 1, display: 'flex', gap: '3rem' }}>
               {menuData[activeMenu].columns.map((col, idx) => (
                 <div key={idx} style={{ flex: 1 }}>
-                  <h4 style={{ 
-                    fontSize: '0.85rem', 
-                    color: '#ffffff', 
-                    fontWeight: 600, 
+                  <h4 style={{
+                    fontSize: '0.85rem',
+                    color: '#ffffff',
+                    fontWeight: 600,
                     marginBottom: '1.25rem',
                     paddingBottom: '0.75rem',
                     borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
@@ -279,22 +261,22 @@ export default function Header() {
                       const sectionSlug = createSlug(activeMenu);
                       const itemSlug = createSlug(item);
                       const href = `/${sectionSlug}/${itemSlug}`;
-                      
+
                       return (
                         <li key={itemIdx}>
-                          <Link href={href} className="mega-menu-link" style={{ 
-                            color: '#cbd5e1', 
-                            textDecoration: 'none', 
+                          <Link href={href} className="mega-menu-link" style={{
+                            color: '#cbd5e1',
+                            textDecoration: 'none',
                             fontSize: '0.95rem',
                             transition: 'all 0.2s ease',
                             display: 'inline-flex',
                             alignItems: 'center',
                             gap: '0.5rem'
                           }}>
-                            <span style={{ 
-                              width: '4px', 
-                              height: '4px', 
-                              borderRadius: '50%', 
+                            <span style={{
+                              width: '4px',
+                              height: '4px',
+                              borderRadius: '50%',
                               backgroundColor: '#0ea5e9',
                               opacity: 0.5,
                               transition: 'all 0.2s ease'
@@ -310,24 +292,24 @@ export default function Header() {
             </div>
 
             {/* Featured Section */}
-            <div style={{ 
-              flex: '0 0 320px', 
-              backgroundColor: 'rgba(255, 255, 255, 0.03)', 
-              padding: '2rem', 
-              borderRadius: '12px', 
+            <div style={{
+              flex: '0 0 320px',
+              backgroundColor: 'rgba(255, 255, 255, 0.03)',
+              padding: '2rem',
+              borderRadius: '12px',
               border: '1px solid rgba(255, 255, 255, 0.05)',
               position: 'relative',
               overflow: 'hidden'
             }}>
               <div style={{ position: 'absolute', top: 0, right: 0, width: '150px', height: '150px', background: 'radial-gradient(circle, rgba(14, 165, 233, 0.1) 0%, rgba(0, 0, 0, 0) 70%)', borderRadius: '50%' }}></div>
-              <span style={{ 
-                display: 'inline-flex', 
+              <span style={{
+                display: 'inline-flex',
                 alignItems: 'center',
                 gap: '0.5rem',
-                fontSize: '0.75rem', 
-                fontWeight: 600, 
-                textTransform: 'uppercase', 
-                letterSpacing: '0.05em', 
+                fontSize: '0.75rem',
+                fontWeight: 600,
+                textTransform: 'uppercase',
+                letterSpacing: '0.05em',
                 color: '#0ea5e9',
                 marginBottom: '1rem'
               }}>
@@ -337,23 +319,23 @@ export default function Header() {
               <p style={{ color: '#f8fafc', fontWeight: 300, fontSize: '1.1rem', lineHeight: 1.5, marginBottom: '2rem', position: 'relative', zIndex: 1 }}>
                 {menuData[activeMenu].featured.desc}
               </p>
-              <a href="#" style={{ 
-                display: 'inline-flex', 
-                alignItems: 'center', 
-                gap: '0.5rem', 
-                color: '#ffffff', 
+              <a href="#" style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                color: '#ffffff',
                 backgroundColor: '#0ea5e9',
                 padding: '0.75rem 1.5rem',
                 borderRadius: '100px',
-                fontWeight: 600, 
+                fontWeight: 600,
                 fontSize: '0.9rem',
                 textDecoration: 'none',
                 transition: 'background-color 0.2s',
                 position: 'relative',
                 zIndex: 1
               }}
-              onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#0284c7'}
-              onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#0ea5e9'}
+                onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#0284c7'}
+                onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#0ea5e9'}
               >
                 {menuData[activeMenu].featured.action} <ArrowRight size={16} />
               </a>
@@ -362,7 +344,8 @@ export default function Header() {
         )}
       </div>
 
-      <style dangerouslySetInnerHTML={{__html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         @media (max-width: 992px) {
           .hidden-mobile { display: none !important; }
           .show-mobile { display: block !important; }
@@ -402,17 +385,17 @@ export default function Header() {
           const isExpanded = expandedMobileMenu === item;
           return (
             <div key={item} style={{ marginBottom: '0.5rem', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-              <button 
+              <button
                 onClick={() => setExpandedMobileMenu(isExpanded ? null : item)}
-                style={{ 
-                  width: '100%', 
-                  display: 'flex', 
-                  justifyContent: 'space-between', 
-                  alignItems: 'center', 
-                  backgroundColor: 'transparent', 
-                  border: 'none', 
+                style={{
+                  width: '100%',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  backgroundColor: 'transparent',
+                  border: 'none',
                   padding: '1.25rem 0',
-                  color: isExpanded ? '#0ea5e9' : '#ffffff', 
+                  color: isExpanded ? '#0ea5e9' : '#ffffff',
                   fontSize: '1.25rem',
                   fontWeight: 400,
                   cursor: 'pointer',
@@ -420,7 +403,7 @@ export default function Header() {
                 }}
               >
                 {item}
-                <span style={{ 
+                <span style={{
                   transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
                   transition: 'transform 0.3s ease',
                   fontSize: '0.8rem',
@@ -429,10 +412,10 @@ export default function Header() {
                   ▼
                 </span>
               </button>
-              
-              <div style={{ 
-                maxHeight: isExpanded ? '500px' : '0', 
-                overflow: 'hidden', 
+
+              <div style={{
+                maxHeight: isExpanded ? '500px' : '0',
+                overflow: 'hidden',
                 transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                 opacity: isExpanded ? 1 : 0,
                 paddingLeft: '0.5rem'
@@ -442,16 +425,16 @@ export default function Header() {
                     const sectionSlug = createSlug(item);
                     const itemSlug = createSlug(subItem);
                     const href = `/${sectionSlug}/${itemSlug}`;
-                    
+
                     return (
                       <li key={subItem}>
-                        <Link href={href} style={{ 
-                          color: '#cbd5e1', 
-                          textDecoration: 'none', 
-                          fontSize: '1rem', 
-                          display: 'flex', 
-                          alignItems: 'center', 
-                          gap: '0.5rem' 
+                        <Link href={href} style={{
+                          color: '#cbd5e1',
+                          textDecoration: 'none',
+                          fontSize: '1rem',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '0.5rem'
                         }} onClick={() => setMobileMenuOpen(false)}>
                           <span style={{ width: '4px', height: '4px', borderRadius: '50%', backgroundColor: '#0ea5e9', opacity: 0.5 }}></span>
                           {subItem}
